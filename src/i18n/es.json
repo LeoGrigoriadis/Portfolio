@@ -1,0 +1,114 @@
+{
+  "meta": {
+    "title": "Matías Leonel Grigoriadis — Fullstack Developer",
+    "description": "Portfolio profesional de Matías Leonel Grigoriadis, desarrollador fullstack especializado en Java, Spring Boot y tecnologías web modernas. Mar del Plata, Argentina."
+  },
+  "nav": {
+    "about": "Sobre Mí",
+    "experience": "Experiencia",
+    "education": "Formación",
+    "stack": "Tecnologías",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "name": "Matías Leonel Grigoriadis",
+    "role": "Fullstack Developer",
+    "description": "Desarrollador de Software fullstack con más de 3 años de experiencia en el diseño e implementación de soluciones robustas, seguras y escalables. Especializado en Java, Spring Boot, Hibernate y SQL, con dominio de HTML/CSS, JavaScript y formación en React y TypeScript.",
+    "commitment": "Comprometido con buenas prácticas de desarrollo seguro y metodologías ágiles, aportando comunicación clara, proactividad y aprendizaje continuo.",
+    "cta_contact": "Contactar",
+    "cta_linkedin": "LinkedIn",
+    "scroll_hint": "Scroll para explorar"
+  },
+  "experience": {
+    "label": "Experiencia Profesional",
+    "title": "Donde crezco cada día",
+    "company": "Fidelity Marketing",
+    "role": "Fullstack Developer · Junior Advanced",
+    "period": "Jul 2022 — Actualidad",
+    "duration": "+3 años",
+    "industry": "Multinacional · Rubro Fidelización",
+    "responsibilities": [
+      "Desarrollo de funcionalidades end-to-end con Java + Spring e Hibernate para el Backend y PHP, JavaScript (jQuery), HTML/CSS para el Frontend.",
+      "Implementación de nuevas funcionalidades y resolución de bugs. Participación activa en las entregas de valor.",
+      "Aplicación de buenas prácticas de desarrollo seguro, orientado a la calidad del código y la protección de la información.",
+      "Participación activa en despliegues, soporte técnico y mejoras de documentación.",
+      "Colaboración con QA y otros equipos técnicos, mejorando la comunicación interáreas."
+    ]
+  },
+  "education": {
+    "label": "Formación Académica",
+    "title": "Base sólida",
+    "items": [
+      {
+        "degree": "Tecnicatura Superior en Análisis, Desarrollo y Programación de Aplicaciones",
+        "institution": "Instituto Superior de Estudios Técnicos (ISET)",
+        "period": "Mar 2023 — Dic 2025"
+      },
+      {
+        "degree": "Técnico en Informática Profesional y Personal",
+        "institution": "Escuela de Educación Secundaria Técnica N°5 Amancio Williams",
+        "period": "Ene 2015 — Dic 2021"
+      }
+    ],
+    "certifications_label": "Certificaciones",
+    "certifications": [
+      {
+        "name": "Certificación en Seguridad en el Ciclo de Desarrollo de Software",
+        "issuer": "CSB Global",
+        "period": "Ago 2024 — Sept 2024",
+        "description": "OWASP ZAP TOP 10, escaneo de vulnerabilidades y desarrollo seguro."
+      },
+      {
+        "name": "Curso Intensivo Java Back-End",
+        "issuer": "Dev Place y ATICMA",
+        "period": "Abr 2022 — Jun 2022",
+        "description": "Bootcamp práctico con Java orientado al desarrollo backend profesional."
+      }
+    ]
+  },
+  "stack": {
+    "label": "Stack Tecnológico",
+    "title": "Herramientas del oficio",
+    "categories": {
+      "backend": {
+        "title": "Back-end",
+        "items": ["Java 8", "Java 17", "Spring Boot", "Hibernate", "SQL"]
+      },
+      "frontend": {
+        "title": "Front-end",
+        "items": ["HTML5", "CSS3", "JavaScript", "jQuery", "React", "TypeScript"]
+      },
+      "practices": {
+        "title": "Prácticas",
+        "items": ["REST APIs", "Seguridad Informática", "OWASP ZAP"]
+      },
+      "tools": {
+        "title": "Herramientas",
+        "items": ["Git", "GitHub", "GitLab", "Scrum", "Postman", "Jira", "Trello"]
+      },
+      "soft": {
+        "title": "Competencias",
+        "items": ["Comunicación clara", "Trabajo en equipo", "Aprendizaje continuo", "Proactividad", "Orientación a resultados"]
+      },
+      "languages": {
+        "title": "Idiomas",
+        "items": ["Español (Nativo)", "Inglés (B1 — Intermedio)"]
+      }
+    }
+  },
+  "contact": {
+    "label": "Contacto",
+    "title": "Hablemos",
+    "subtitle": "Estoy abierto a nuevas oportunidades y colaboraciones. No dudes en contactarme.",
+    "email_label": "Email",
+    "linkedin_label": "LinkedIn",
+    "github_label": "GitHub",
+    "location": "Mar del Plata, Buenos Aires, Argentina"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "built_with": "Construido con"
+  },
+  "lang_switch": "EN"
+}

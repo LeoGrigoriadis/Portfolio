@@ -1,0 +1,161 @@
+---
+import '../styles/global.css';
+import type { Lang } from '../i18n/utils';
+import { useTranslations, getAlternateLang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const altLang = getAlternateLang(lang);
+const canonicalUrl = `https://leogrigoriadis.dev/${lang}/`;
+const alternateUrl = `https://leogrigoriadis.dev/${altLang}/`;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- SEO -->
+  <title>{t.meta.title}</title>
+  <meta name="description" content={t.meta.description} />
+  <meta name="author" content="Matías Leonel Grigoriadis" />
+  <link rel="canonical" href={canonicalUrl} />
+  <link rel="alternate" hreflang={lang} href={canonicalUrl} />
+  <link rel="alternate" hreflang={altLang} href={alternateUrl} />
+  <link rel="alternate" hreflang="x-default" href="https://leogrigoriadis.dev/es/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={t.meta.title} />
+  <meta property="og:description" content={t.meta.description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:locale" content={lang === 'es' ? 'es_AR' : 'en_US'} />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- JSON-LD Structured Data -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Matías Leonel Grigoriadis",
+      "jobTitle": "Fullstack Developer",
+      "url": "https://leogrigoriadis.dev",
+      "email": "leonelgrigoriadist5@gmail.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/leonel-grigoriadis/",
+        "https://github.com/LeoGrigoriadis"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mar del Plata",
+        "addressRegion": "Buenos Aires",
+        "addressCountry": "AR"
+      },
+      "knowsAbout": ["Java", "Spring Boot", "Hibernate", "SQL", "JavaScript", "HTML", "CSS", "React"]
+    })}
+  />
+
+  <meta name="generator" content={Astro.generator} />
+</head>
+<body>
+  <!-- Background layers for section transitions -->
+  <div id="bg-container" aria-hidden="true">
+    <div class="bg-layer bg-hero active"></div>
+    <div class="bg-layer bg-experience"></div>
+    <div class="bg-layer bg-education"></div>
+    <div class="bg-layer bg-techstack"></div>
+    <div class="bg-layer bg-contact"></div>
+  </div>
+
+  <slot />
+
+  <!-- Client-side scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Background Layer Transitions ---
+      const bgLayers = document.querySelectorAll('.bg-layer');
+      const sections = document.querySelectorAll('section[data-section]');
+
+      const bgObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sectionName = entry.target.getAttribute('data-section');
+            bgLayers.forEach(layer => {
+              layer.classList.toggle('active', layer.classList.contains(`bg-${sectionName}`));
+            });
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+              const href = link.getAttribute('href');
+              link.classList.toggle('active', href === `#${sectionName}`);
+            });
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '-5% 0px -30% 0px'
+      });
+
+      sections.forEach(section => bgObserver.observe(section));
+
+      // --- Reveal Animations ---
+      const reveals = document.querySelectorAll('.reveal');
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      reveals.forEach(el => revealObserver.observe(el));
+
+      // --- Navbar Scroll Effect ---
+      const navbar = document.getElementById('navbar');
+      if (navbar) {
+        window.addEventListener('scroll', () => {
+          navbar.classList.toggle('scrolled', window.scrollY > 40);
+        }, { passive: true });
+      }
+
+      // --- Mobile Menu Toggle ---
+      const menuBtn = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+          const isOpen = mobileMenu.classList.toggle('open');
+          menuBtn.classList.toggle('open', isOpen);
+          menuBtn.setAttribute('aria-expanded', String(isOpen));
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            menuBtn.classList.remove('open');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

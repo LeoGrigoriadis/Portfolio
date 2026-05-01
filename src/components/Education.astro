@@ -1,0 +1,165 @@
+---
+import type { Lang } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="education" data-section="education" aria-label={t.education.label}>
+  <div class="section-inner">
+    <p class="section-label reveal">{t.education.label}</p>
+    <h2 class="reveal reveal-delay-1">{t.education.title}</h2>
+
+    <!-- Education Cards -->
+    <div class="education-grid">
+      {t.education.items.map((item: any, i: number) => (
+        <div class={`education-card glass-card reveal reveal-delay-${i + 2}`}>
+          <div class="education-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </div>
+          <h3 class="education-degree">{item.degree}</h3>
+          <p class="education-institution">{item.institution}</p>
+          <span class="education-period">{item.period}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Certifications -->
+    <div class="certifications-section">
+      <p class="section-label reveal">{t.education.certifications_label}</p>
+
+      <div class="certifications-grid">
+        {t.education.certifications.map((cert: any, i: number) => (
+          <div class={`certification-card glass-card reveal reveal-delay-${i + 1}`}>
+            <div class="cert-header">
+              <div class="cert-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="6"/>
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+                </svg>
+              </div>
+              <span class="cert-issuer">{cert.issuer}</span>
+            </div>
+            <h3 class="cert-name">{cert.name}</h3>
+            <p class="cert-description">{cert.description}</p>
+            <span class="cert-period">{cert.period}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 4rem;
+  }
+
+  .education-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .education-icon {
+    color: var(--accent-emerald);
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+  }
+
+  .education-degree {
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .education-institution {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+  }
+
+  .education-period {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--accent-emerald);
+    opacity: 0.8;
+    letter-spacing: 0.02em;
+    margin-top: auto;
+  }
+
+  /* Certifications */
+  .certifications-section {
+    margin-top: 1rem;
+  }
+
+  .certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .certification-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .cert-header {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .cert-icon {
+    color: var(--accent-emerald);
+    opacity: 0.7;
+  }
+
+  .cert-issuer {
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+  }
+
+  .cert-name {
+    font-size: clamp(1rem, 1.3vw, 1.12rem);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .cert-description {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+  }
+
+  .cert-period {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--accent-emerald);
+    opacity: 0.7;
+    margin-top: auto;
+  }
+
+  @media (max-width: 768px) {
+    .education-grid,
+    .certifications-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,169 @@
+---
+import type { Lang } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="hero" data-section="hero" class="hero-section" aria-label={t.nav.about}>
+  <div class="section-inner hero-inner">
+    <div class="hero-content">
+      <p class="hero-greeting reveal">{t.hero.greeting}</p>
+      <h1 class="hero-name reveal reveal-delay-1">{t.hero.name}</h1>
+      <p class="hero-role reveal reveal-delay-2">{t.hero.role}</p>
+      <p class="hero-description reveal reveal-delay-3">{t.hero.description}</p>
+      <p class="hero-commitment reveal reveal-delay-4">{t.hero.commitment}</p>
+      <div class="hero-ctas reveal reveal-delay-5">
+        <a href="#contact" class="btn-primary">
+          {t.hero.cta_contact}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/leonel-grigoriadis/" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+          {t.hero.cta_linkedin}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17L17 7M7 7h10v10"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator reveal reveal-delay-6">
+      <span class="scroll-text">{t.hero.scroll_hint}</span>
+      <div class="scroll-chevron">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-top: calc(var(--navbar-height) + var(--section-py));
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - var(--navbar-height) - var(--section-py) * 2);
+    position: relative;
+  }
+
+  .hero-content {
+    max-width: 800px;
+  }
+
+  .hero-greeting {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+    font-weight: 400;
+    color: var(--text-tertiary);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-name {
+    font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #f5f5f7 0%, #d2d2d7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-role {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-weight: 500;
+    color: var(--accent-blue);
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-description {
+    font-size: clamp(1rem, 1.2vw, 1.15rem);
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin-bottom: 1rem;
+  }
+
+  .hero-commitment {
+    font-size: clamp(0.92rem, 1.1vw, 1.05rem);
+    line-height: 1.7;
+    color: var(--text-tertiary);
+    max-width: 640px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* Scroll Indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .scroll-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-tertiary);
+  }
+
+  .scroll-chevron {
+    animation: bounce 2s ease-in-out infinite;
+    color: var(--text-tertiary);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(8px); opacity: 1; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      padding-top: calc(var(--navbar-height) + 3rem);
+    }
+
+    .hero-inner {
+      min-height: calc(100vh - var(--navbar-height) - 6rem);
+      min-height: calc(100dvh - var(--navbar-height) - 6rem);
+    }
+
+    .hero-ctas {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .scroll-indicator {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,123 @@
+---
+import type { Lang } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const categoryOrder = ['backend', 'frontend', 'practices', 'tools', 'soft', 'languages'] as const;
+const categoryIcons: Record<string, string> = {
+  backend: 'M13 2L3 14h9l-1 8 10-12h-9l1-8',
+  frontend: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+  practices: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+  tools: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z',
+  soft: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+  languages: 'M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6'
+};
+---
+
+<section id="techstack" data-section="techstack" aria-label={t.stack.label}>
+  <div class="section-inner">
+    <p class="section-label reveal">{t.stack.label}</p>
+    <h2 class="reveal reveal-delay-1">{t.stack.title}</h2>
+
+    <div class="stack-grid">
+      {categoryOrder.map((key, catIndex) => {
+        const category = (t.stack.categories as any)[key];
+        if (!category) return null;
+        return (
+          <div class={`stack-category glass-card reveal reveal-delay-${Math.min(catIndex + 2, 6)}`}>
+            <div class="category-header">
+              <div class="category-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d={categoryIcons[key]} />
+                </svg>
+              </div>
+              <h3 class="category-title">{category.title}</h3>
+            </div>
+            <div class="category-items">
+              {category.items.map((item: string) => (
+                <span class="tech-badge">{item}</span>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .stack-category {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .category-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--accent-cyan);
+  }
+
+  .category-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .category-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.9rem;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 980px;
+    transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    cursor: default;
+  }
+
+  .tech-badge:hover {
+    color: var(--text-primary);
+    background: rgba(6, 182, 212, 0.08);
+    border-color: rgba(6, 182, 212, 0.2);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    .stack-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
